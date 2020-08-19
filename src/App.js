@@ -25,10 +25,9 @@ export default function App() {
     const response = await api.post(`/repositories/${id}/like`);
 
     if(response.data){
-      setRepositories([repository.data,
-        ...repositories.filter((repository) => repository.id !== id),
-        
-      ])
+      const repositoriesIndex = repositories.findIndex(repository => repository.id == id);
+      repositories.splice(repositoriesIndex, 1, response.data)
+      setRepositories([...repositories]);
     }
 
     
